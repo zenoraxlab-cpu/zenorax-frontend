@@ -52,3 +52,222 @@ nav a {
     padding: 12px 22px;
     border-radius: 8px;
     cursor: pointer;
+    font-weight: 600;
+    border: none;
+}
+
+.btn-accent {
+    background: #3A7DE8;
+    color: white;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid #3A7DE8;
+    color: #3A7DE8;
+}
+
+/* -------------------------------- */
+/* HERO */
+/* -------------------------------- */
+
+.hero {
+    position: relative;
+    padding: 160px 0;
+}
+
+.hero-title {
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    max-width: 560px;
+}
+
+.hero-sub {
+    font-size: 20px;
+    color: #5A5A5A;
+    margin-bottom: 40px;
+    max-width: 520px;
+}
+
+.hero-buttons .btn {
+    margin-right: 16px;
+}
+
+/* NEW WAVE (AS IN REFERENCE) */
+.hero-wave {
+    position: absolute;
+    right: 0;
+    top: 120px;
+    width: 60%;
+    opacity: 0.9;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-wave img {
+    width: 100%;
+    display: block;
+}
+
+/* -------------------------------- */
+/* SECTIONS */
+/* -------------------------------- */
+
+.section {
+    padding: 120px 0 60px 0;
+}
+
+.section h2 {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.section p.sub {
+    font-size: 20px;
+    color: #5A5A5A;
+    margin-bottom: 40px;
+}
+
+/* -------------------------------- */
+/* TOOLS GRID */
+/* -------------------------------- */
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.tool-card {
+    background: white;
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid #E6E7EC;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    transition: 0.25s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+}
+
+.tool-card h3 {
+    margin-top: 0;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.tool-card p {
+    color: #5A5A5A;
+    font-size: 16px;
+}
+
+/* -------------------------------- */
+/* PHONE → GOOD SOUND */
+/* -------------------------------- */
+
+.usp {
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.usp-text h2 {
+    font-size: 44px;
+    margin-bottom: 16px;
+}
+
+.usp-text ul {
+    list-style: none;
+    padding: 0;
+}
+
+.usp-text ul li {
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.usp-img {
+    width: 460px;
+    height: 280px;
+    background: #E9F1FF;
+    border-radius: 16px;
+}
+
+/* -------------------------------- */
+/* PRICING */
+/* -------------------------------- */
+
+.pricing {
+    background: #F7F8FB;
+    padding: 120px 0;
+}
+
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.pricing-card {
+    background: white;
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid #E6E7EC;
+}
+
+.pricing-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+/* -------------------------------- */
+/* FOOTER */
+/* -------------------------------- */
+
+footer {
+    padding: 40px 0;
+    border-top: 1px solid #E6E7EC;
+    text-align: center;
+    font-size: 14px;
+    color: #5A5A5A;
+}
+
+/* -------------------------------- */
+/* MOBILE */
+/* -------------------------------- */
+
+@media (max-width: 900px) {
+
+    .logo img {
+        height: 32px;
+    }
+
+    .hero {
+        text-align: center;
+        padding-top: 140px;
+        padding-bottom: 80px;
+    }
+
+    .hero-wave {
+        width: 90%;
+        top: 200px;
+        margin: 0 auto;
+        left: 5%;
+    }
+
+    .tools-grid,
+    .pricing-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .usp {
+        flex-direction: column;
+        text-align: center;
+    }
+}
