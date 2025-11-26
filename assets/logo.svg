@@ -1,0 +1,35 @@
+<svg width="220" height="60" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Wave Icon -->
+  <defs>
+    <linearGradient id="zenoraxGrad" x1="0" y1="0" x2="0" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6EC9FF"/>
+      <stop offset="1" stop-color="#1E6AE9"/>
+    </linearGradient>
+  </defs>
+
+  <path d="M10 38C14 28 18 22 22 22C27 22 30 38 35 38C40 38 43 26 48 26C53 26 56 34 61 34"
+        stroke="url(#zenoraxGrad)"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"/>
+
+  <!-- Text: Zenorax -->
+  <text x="75" y="28"
+        font-family="Inter, sans-serif"
+        font-size="28"
+        font-weight="600"
+        fill="#111">
+    Zenorax
+  </text>
+
+  <!-- Text: SOUND LAB -->
+  <text x="75" y="48"
+        font-family="Inter, sans-serif"
+        font-size="14"
+        letter-spacing="4px"
+        font-weight="400"
+        fill="#333">
+    SOUND LAB
+  </text>
+</svg>
