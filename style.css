@@ -23,10 +23,10 @@ body {
 header {
     position: sticky;
     top: 0;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid #E6E7EC;
-    padding: 20px 0;
+    padding: 18px 0;
     z-index: 100;
 }
 
@@ -37,19 +37,24 @@ header .row {
 }
 
 .logo img {
-    height: 40px;
+    height: 42px;
     display: block;
 }
 
 nav a {
-    margin-left: 32px;
+    margin-left: 28px;
     text-decoration: none;
     color: #101010;
     font-size: 16px;
+    transition: 0.2s ease;
+}
+
+nav a:hover {
+    opacity: 0.6;
 }
 
 .btn {
-    padding: 12px 22px;
+    padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
@@ -73,9 +78,9 @@ nav a {
 
 .hero {
     position: relative;
-    padding-top: 140px;
+    padding-top: 150px;
     padding-bottom: 160px;
-    overflow: hidden; /* важно для чистоты */
+    overflow: hidden;
 }
 
 .hero-title {
@@ -97,15 +102,15 @@ nav a {
     margin-right: 16px;
 }
 
-/* REAL PNG WAVE */
+/* Correct Wave */
 .hero-wave {
     position: absolute;
-    right: -180px;
-    top: -40px;
-    width: 780px;
+    right: -150px;
+    top: -60px;
+    width: 900px;
     pointer-events: none;
     z-index: -1;
-    opacity: 0.92;
+    opacity: 0.95;
 }
 
 .hero-wave img {
@@ -257,15 +262,15 @@ footer {
 
     .hero {
         text-align: center;
-        padding-top: 100px;
+        padding-top: 110px;
         padding-bottom: 80px;
     }
 
     .hero-wave {
-        width: 100%;
+        width: 110%;
         right: -40px;
-        top: 120px;
-        opacity: 0.6;
+        top: 180px;
+        opacity: 0.65;
     }
 
     .tools-grid,
@@ -275,11 +280,4 @@ footer {
 
     .usp {
         flex-direction: column;
-        text-align: center;
-    }
-
-    .usp-img {
-        width: 100%;
-        height: 200px;
-    }
-}
+        text-align:
