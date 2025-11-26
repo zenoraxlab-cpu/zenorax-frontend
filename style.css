@@ -220,4 +220,14 @@ footer {
     .pricing-cards {
         grid-template-columns: 1fr;
     }
+.logo img {
+    display: block;
+    height: 40px;
 }
+
+@media (max-width: 900px) {
+    .logo img {
+        height: 32px;
+    }
+}
+
