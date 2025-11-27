@@ -5,12 +5,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Your external stylesheet -->
     <link rel="stylesheet" href="style.css">
 
     <title>Zenorax Sound Lab</title>
 </head>
-    <!-- MODAL -->
+
+<body>
+
+<!-- MODAL -->
 <div id="toolModal" class="modal hidden">
     <div class="modal-content">
 
@@ -26,9 +28,6 @@
         <div id="modalResult"></div>
     </div>
 </div>
-
-
-<body>
 
 <!-- HEADER -->
 <header>
@@ -69,9 +68,8 @@
     </div>
 
     <div class="hero-wave">
-    <img src="assets/hero-wave.png" alt="sound-wave">
-</div>
-
+        <img src="assets/hero-wave.png" alt="sound-wave">
+    </div>
 
 </section>
 <!-- END HERO -->
@@ -83,40 +81,34 @@
 
     <div class="tools-grid">
 
-        <div class="tool-card">
+        <div class="tool-card" onclick="openModal('Normalization')">
             <h3>Normalization</h3>
             <p>Automatic gain and LUFS adjustment.</p>
-            <div class="tool-card" onclick="openModal('Normalization')">
         </div>
 
-        <div class="tool-card">
+        <div class="tool-card" onclick="openModal('Noise Reduction')">
             <h3>Noise Reduction</h3>
             <p>Remove background noise and hum.</p>
-            <div class="tool-card" onclick="openModal('Noise Reduction')">
         </div>
 
-        <div class="tool-card">
+        <div class="tool-card" onclick="openModal('Format Converter')">
             <h3>Format Converter</h3>
             <p>Convert WAV, FLAC, MP3, AAC.</p>
-            <div class="tool-card" onclick="openModal('Format Converter')">
         </div>
 
-        <div class="tool-card">
+        <div class="tool-card" onclick="openModal('Phone → Good Sound')">
             <h3>Phone → Good Sound</h3>
             <p>Improve smartphone recordings instantly.</p>
-            <div class="tool-card" onclick="openModal('Phone → Good Sound')">
         </div>
 
-        <div class="tool-card">
+        <div class="tool-card" onclick="openModal('Trim Silence')">
             <h3>Trim Silence</h3>
             <p>Auto-remove silence from start/end.</p>
-            <div class="tool-card" onclick="openModal('Trim Silence')">
         </div>
 
-        <div class="tool-card">
+        <div class="tool-card" onclick="openModal('Basic Mastering')">
             <h3>Basic Mastering</h3>
             <p>Smooth compression and loudness.</p>
-            <div class="tool-card" onclick="openModal('Basic Mastering')">
         </div>
 
     </div>
@@ -180,7 +172,10 @@
 <footer>
     © 2025 Zenorax Sound Lab — All rights reserved.
 </footer>
-    <script>
+
+
+<!-- JS -->
+<script>
 const API = "https://zenorax-backend.onrender.com";
 
 let currentTool = null;
@@ -229,28 +224,20 @@ function openModal(toolName) {
     }
 
     if (toolName === "Phone → Good Sound") {
-        params.innerHTML = `
-            <p>Uses EQ + HPF + mild compression</p>
-        `;
+        params.innerHTML = `<p>Uses EQ + HPF + light compression</p>`;
     }
 
-    if (toolName === "Noise Reduction") {
-        params.innerHTML = `<p>Coming soon</p>`;
-    }
-
-    if (toolName === "Basic Mastering") {
+    if (toolName === "Noise Reduction" || toolName === "Basic Mastering") {
         params.innerHTML = `<p>Coming soon</p>`;
     }
 
     document.getElementById("toolModal").classList.remove("hidden");
 }
 
-
 function closeModal() {
     document.getElementById("toolModal").classList.add("hidden");
     document.getElementById("modalResult").innerHTML = "";
 }
-
 
 async function runProcessing() {
     const fileInput = document.getElementById("modalFile");
@@ -284,7 +271,6 @@ async function runProcessing() {
     }
 
     if (currentTool === "Phone → Good Sound") {
-        // временно используем trim+normalize один за другим
         endpoint = "/normalize";
         formData.append("mode", "lufs");
         formData.append("target", "-14");
@@ -316,7 +302,6 @@ async function runProcessing() {
     resultBox.innerHTML = "Done ✔ File downloaded.";
 }
 </script>
-
 
 </body>
 </html>
