@@ -174,6 +174,143 @@
 <footer>
     © 2025 Zenorax Sound Lab — All rights reserved.
 </footer>
+    <script>
+const API = "https://zenorax-backend.onrender.com";
+
+let currentTool = null;
+
+function openModal(toolName) {
+    currentTool = toolName;
+    document.getElementById("modalTitle").innerText = toolName;
+
+    const params = document.getElementById("modalParams");
+    params.innerHTML = "";
+
+    if (toolName === "Normalization") {
+        params.innerHTML = `
+            <label>Mode</label>
+            <select id="normMode">
+                <option value="lufs">LUFS (-14)</option>
+                <option value="peak">Peak (-6)</option>
+            </select>
+        `;
+    }
+
+    if (toolName === "Format Converter") {
+        params.innerHTML = `
+            <label>Format</label>
+            <select id="convFormat">
+                <option value="wav">WAV</option>
+                <option value="mp3">MP3</option>
+                <option value="flac">FLAC</option>
+                <option value="aac">AAC</option>
+            </select>
+
+            <label>Bitrate</label>
+            <input id="convBitrate" type="number" placeholder="128 / 192 / 256">
+        `;
+    }
+
+    if (toolName === "Trim Silence") {
+        params.innerHTML = `
+            <label>Preset</label>
+            <select id="trimPreset">
+                <option value="voice">Voice</option>
+                <option value="music">Music</option>
+                <option value="aggressive">Aggressive</option>
+            </select>
+        `;
+    }
+
+    if (toolName === "Phone → Good Sound") {
+        params.innerHTML = `
+            <p>Uses EQ + HPF + mild compression</p>
+        `;
+    }
+
+    if (toolName === "Noise Reduction") {
+        params.innerHTML = `<p>Coming soon</p>`;
+    }
+
+    if (toolName === "Basic Mastering") {
+        params.innerHTML = `<p>Coming soon</p>`;
+    }
+
+    document.getElementById("toolModal").classList.remove("hidden");
+}
+
+
+function closeModal() {
+    document.getElementById("toolModal").classList.add("hidden");
+    document.getElementById("modalResult").innerHTML = "";
+}
+
+
+async function runProcessing() {
+    const fileInput = document.getElementById("modalFile");
+    if (!fileInput.files.length) {
+        alert("Select a file");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", fileInput.files[0]);
+
+    let endpoint = "";
+
+    if (currentTool === "Normalization") {
+        endpoint = "/normalize";
+        const mode = document.getElementById("normMode").value;
+        formData.append("mode", mode);
+        formData.append("target", mode === "lufs" ? "-14" : "-6");
+    }
+
+    if (currentTool === "Trim Silence") {
+        endpoint = "/trim";
+        const preset = document.getElementById("trimPreset").value;
+        formData.append("preset", preset);
+    }
+
+    if (currentTool === "Format Converter") {
+        endpoint = "/convert";
+        formData.append("format", document.getElementById("convFormat").value);
+        formData.append("bitrate", document.getElementById("convBitrate").value);
+    }
+
+    if (currentTool === "Phone → Good Sound") {
+        // временно используем trim+normalize один за другим
+        endpoint = "/normalize";
+        formData.append("mode", "lufs");
+        formData.append("target", "-14");
+    }
+
+    if (!endpoint) {
+        alert("This tool is not implemented yet");
+        return;
+    }
+
+    const resultBox = document.getElementById("modalResult");
+    resultBox.innerHTML = "Processing...";
+
+    const res = await fetch(API + endpoint, { method: "POST", body: formData });
+
+    if (!res.ok) {
+        resultBox.innerHTML = "Error processing file.";
+        return;
+    }
+
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "processed.wav";
+    a.click();
+
+    resultBox.innerHTML = "Done ✔ File downloaded.";
+}
+</script>
+
 
 </body>
 </html>
