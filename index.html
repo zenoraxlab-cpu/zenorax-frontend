@@ -10,6 +10,23 @@
 
     <title>Zenorax Sound Lab</title>
 </head>
+    <!-- MODAL -->
+<div id="toolModal" class="modal hidden">
+    <div class="modal-content">
+
+        <h3 id="modalTitle">Tool</h3>
+
+        <input id="modalFile" type="file" accept="audio/*,video/*" />
+
+        <div id="modalParams"></div>
+
+        <button class="btn btn-accent" onclick="runProcessing()">Process</button>
+        <button class="btn btn-outline" onclick="closeModal()">Close</button>
+
+        <div id="modalResult"></div>
+    </div>
+</div>
+
 
 <body>
 
