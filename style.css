@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="style.css">
+
     <title>Zenorax Sound Lab</title>
 </head>
 
 <body>
 
 <!-- MODAL -->
-<div id="toolModal" class="modal">
+<div id="toolModal" class="modal hidden">
     <div class="modal-content">
 
         <h3 id="modalTitle">Tool</h3>
@@ -25,7 +26,6 @@
         <button class="btn btn-outline" onclick="closeModal()">Close</button>
 
         <div id="modalResult"></div>
-
     </div>
 </div>
 
@@ -72,6 +72,7 @@
     </div>
 
 </section>
+<!-- END HERO -->
 
 <!-- TOOLS -->
 <section class="section container">
@@ -172,6 +173,7 @@
     © 2025 Zenorax Sound Lab — All rights reserved.
 </footer>
 
+
 <!-- JS -->
 <script>
 const API = "https://zenorax-backend.onrender.com";
@@ -229,19 +231,13 @@ function openModal(toolName) {
         params.innerHTML = `<p>Coming soon</p>`;
     }
 
-    document.getElementById("toolModal").classList.add("show");
+    document.getElementById("toolModal").classList.remove("hidden");
 }
 
 function closeModal() {
-    document.getElementById("toolModal").classList.remove("show");
+    document.getElementById("toolModal").classList.add("hidden");
     document.getElementById("modalResult").innerHTML = "";
 }
-
-document.getElementById("toolModal").addEventListener("click", (e) => {
-    if (e.target.id === "toolModal") {
-        closeModal();
-    }
-});
 
 async function runProcessing() {
     const fileInput = document.getElementById("modalFile");
