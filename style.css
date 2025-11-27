@@ -1,328 +1,311 @@
-/* -------------------------------- */
-/* BASE */
-/* -------------------------------- */
+<!DOCTYPE html>
+<html lang="en">
 
-body {
-    margin: 0;
-    font-family: "Inter", sans-serif;
-    background: #FAFAFD;
-    color: #101010;
-}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-.container {
-    width: 1200px;
-    max-width: 90%;
-    margin: 0 auto;
-    position: relative;
-}
+    <link rel="stylesheet" href="style.css">
+    <title>Zenorax Sound Lab</title>
+</head>
 
-/* -------------------------------- */
-/* HEADER */
-/* -------------------------------- */
+<body>
 
-header {
-    position: sticky;
-    top: 0;
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #E6E7EC;
-    padding: 18px 0;
-    z-index: 100;
-}
+<!-- MODAL -->
+<div id="toolModal" class="modal">
+    <div class="modal-content">
 
-header .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        <h3 id="modalTitle">Tool</h3>
 
-.logo img {
-    height: 42px;
-    display: block;
-}
+        <input id="modalFile" type="file" accept="audio/*,video/*" />
 
-nav a {
-    margin-left: 28px;
-    text-decoration: none;
-    color: #101010;
-    font-size: 16px;
-    transition: 0.2s ease;
-}
+        <div id="modalParams"></div>
 
-nav a:hover {
-    opacity: 0.6;
-}
+        <button class="btn btn-accent" onclick="runProcessing()">Process</button>
+        <button class="btn btn-outline" onclick="closeModal()">Close</button>
 
-.btn {
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    border: none;
-}
+        <div id="modalResult"></div>
 
-.btn-accent {
-    background: #3A7DE8;
-    color: white;
-}
+    </div>
+</div>
 
-.btn-outline {
-    background: transparent;
-    border: 1px solid #3A7DE8;
-    color: #3A7DE8;
-}
+<!-- HEADER -->
+<header>
+    <div class="container">
+        <div class="row">
 
-/* -------------------------------- */
-/* HERO */
-/* -------------------------------- */
+            <div class="logo">
+                <img src="assets/logo.png" alt="Zenorax Sound Lab">
+            </div>
 
-.hero {
-    position: relative;
-    padding-top: 150px;
-    padding-bottom: 160px;
-    overflow: hidden;
-}
+            <nav>
+                <a href="#">Tools</a>
+                <a href="#">Pricing</a>
+                <a href="#">FAQ</a>
+                <a href="#">Contact</a>
+                <a href="#" class="btn">Sign In</a>
+                <a href="#" class="btn btn-accent">Get Started</a>
+            </nav>
 
-.hero-title {
-    font-size: 72px;
-    font-weight: 700;
-    line-height: 1.05;
-    margin-bottom: 24px;
-    max-width: 560px;
-}
+        </div>
+    </div>
+</header>
 
-.hero-sub {
-    font-size: 20px;
-    color: #5A5A5A;
-    margin-bottom: 40px;
-    max-width: 520px;
-}
+<!-- HERO -->
+<section class="hero container">
 
-.hero-buttons .btn {
-    margin-right: 16px;
-}
+    <div class="hero-left">
+        <h1 class="hero-title">Zenorax<br>Sound Lab</h1>
+        <p class="hero-sub">
+            Where sound is refined to its essence<br>
+            with cutting-edge audio technology.
+        </p>
 
-.hero-wave {
-    position: absolute;
-    right: -150px;
-    top: -60px;
-    width: 900px;
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.95;
-}
+        <div class="hero-buttons">
+            <button class="btn btn-accent">Start Free</button>
+            <button class="btn btn-outline">Explore Tools</button>
+        </div>
+    </div>
 
-.hero-wave img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+    <div class="hero-wave">
+        <img src="assets/hero-wave.png" alt="sound-wave">
+    </div>
 
-/* -------------------------------- */
-/* SECTIONS */
-/* -------------------------------- */
+</section>
 
-.section {
-    padding: 120px 0 60px 0;
-}
+<!-- TOOLS -->
+<section class="section container">
+    <h2>Core Tools</h2>
+    <p class="sub">Fast, intuitive, professional</p>
 
-.section h2 {
-    font-size: 48px;
-    margin-bottom: 16px;
-}
+    <div class="tools-grid">
 
-.section p.sub {
-    font-size: 20px;
-    color: #5A5A5A;
-    margin-bottom: 40px;
-}
+        <div class="tool-card" onclick="openModal('Normalization')">
+            <h3>Normalization</h3>
+            <p>Automatic gain and LUFS adjustment.</p>
+        </div>
 
-/* -------------------------------- */
-/* TOOLS */
-/* -------------------------------- */
+        <div class="tool-card" onclick="openModal('Noise Reduction')">
+            <h3>Noise Reduction</h3>
+            <p>Remove background noise and hum.</p>
+        </div>
 
-.tools-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-}
+        <div class="tool-card" onclick="openModal('Format Converter')">
+            <h3>Format Converter</h3>
+            <p>Convert WAV, FLAC, MP3, AAC.</p>
+        </div>
 
-.tool-card {
-    background: white;
-    padding: 32px;
-    border-radius: 16px;
-    border: 1px solid #E6E7EC;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
-    transition: 0.25s ease;
-    cursor: pointer;
-}
+        <div class="tool-card" onclick="openModal('Phone → Good Sound')">
+            <h3>Phone → Good Sound</h3>
+            <p>Improve smartphone recordings instantly.</p>
+        </div>
 
-.tool-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 22px rgba(0,0,0,0.06);
-}
+        <div class="tool-card" onclick="openModal('Trim Silence')">
+            <h3>Trim Silence</h3>
+            <p>Auto-remove silence from start/end.</p>
+        </div>
 
-.tool-card h3 {
-    margin-top: 0;
-    font-size: 22px;
-    margin-bottom: 12px;
-}
+        <div class="tool-card" onclick="openModal('Basic Mastering')">
+            <h3>Basic Mastering</h3>
+            <p>Smooth compression and loudness.</p>
+        </div>
 
-.tool-card p {
-    color: #5A5A5A;
-    font-size: 16px;
-}
+    </div>
+</section>
 
-/* -------------------------------- */
-/* USP */
-/* -------------------------------- */
+<!-- USP BLOCK -->
+<section class="section container">
 
-.usp {
-    display: flex;
-    justify-content: space-between;
-    gap: 60px;
-    align-items: center;
-    margin-top: 40px;
-}
+    <div class="usp">
 
-.usp-text h2 {
-    font-size: 44px;
-    margin-bottom: 16px;
-}
+        <div class="usp-text">
+            <h2>Make your phone videos sound professional.</h2>
+            <p>Perfect for saxophone lessons, music practice, vocals and mobile content.</p>
 
-.usp-text ul {
-    list-style: none;
-    padding: 0;
-}
+            <ul>
+                <li>Noise Reduction</li>
+                <li>EQ Correction</li>
+                <li>Compression</li>
+                <li>Normalization</li>
+                <li>Video remuxing</li>
+            </ul>
 
-.usp-text ul li {
-    margin-bottom: 12px;
-    font-size: 18px;
-}
+            <button class="btn btn-accent">Try Now</button>
+        </div>
 
-.usp-img {
-    width: 460px;
-    height: 280px;
-    background: #E9F1FF;
-    border-radius: 16px;
-}
+        <div class="usp-img"></div>
 
-/* -------------------------------- */
-/* PRICING */
-/* -------------------------------- */
+    </div>
 
-.pricing {
-    background: #F7F8FB;
-    padding: 120px 0;
-}
+</section>
 
-.pricing-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-}
+<!-- PRICING -->
+<section class="pricing">
+    <div class="container">
 
-.pricing-card {
-    background: white;
-    padding: 32px;
-    border-radius: 16px;
-    border: 1px solid #E6E7EC;
-}
+        <h2>Pricing</h2>
+        <p class="sub">Simple, transparent plans</p>
 
-/* -------------------------------- */
-/* FOOTER */
-/* -------------------------------- */
+        <div class="pricing-cards">
 
-footer {
-    padding: 40px 0;
-    border-top: 1px solid #E6E7EC;
-    text-align: center;
-    font-size: 14px;
-    color: #5A5A5A;
-}
+            <div class="pricing-card">
+                <h3>Free</h3>
+                <p>Basic tools, limited processing.</p>
+            </div>
 
-/* -------------------------------- */
-/* MODAL */
-/* -------------------------------- */
+            <div class="pricing-card">
+                <h3>Normal</h3>
+                <p>Full toolkit, higher limits.</p>
+            </div>
 
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.65);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease;
-    z-index: 9999;
-}
+            <div class="pricing-card">
+                <h3>Pro</h3>
+                <p>Unlimited tools & priority queue.</p>
+            </div>
 
-.modal.show {
-    opacity: 1;
-    pointer-events: auto;
-}
+        </div>
+    </div>
+</section>
 
-.modal-content {
-    background: #fff;
-    padding: 28px;
-    border-radius: 14px;
-    width: 360px;
-    max-width: 90%;
-    text-align: center;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
-    animation: popup 0.25s ease;
-}
+<!-- FOOTER -->
+<footer>
+    © 2025 Zenorax Sound Lab — All rights reserved.
+</footer>
 
-@keyframes popup {
-    from { transform: scale(0.92); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
+<!-- JS -->
+<script>
+const API = "https://zenorax-backend.onrender.com";
 
-.modal-content input,
-.modal-content select {
-    width: 100%;
-    margin-bottom: 12px;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #E6E7EC;
-    font-size: 14px;
-    background: #FAFAFD;
-}
+let currentTool = null;
 
-.modal-content button {
-    width: 100%;
-    margin-top: 12px;
-}
+function openModal(toolName) {
+    currentTool = toolName;
+    document.getElementById("modalTitle").innerText = toolName;
 
-#toolModal {
-    cursor: pointer;
-}
+    const params = document.getElementById("modalParams");
+    params.innerHTML = "";
 
-#toolModal .modal-content {
-    cursor: default;
-}
-
-/* -------------------------------- */
-/* MOBILE */
-/* -------------------------------- */
-
-@media (max-width: 900px) {
-
-    .logo img {
-        height: 32px;
+    if (toolName === "Normalization") {
+        params.innerHTML = `
+            <label>Mode</label>
+            <select id="normMode">
+                <option value="lufs">LUFS (-14)</option>
+                <option value="peak">Peak (-6)</option>
+            </select>
+        `;
     }
 
-    .tools-grid,
-    .pricing-cards {
-        grid-template-columns: 1fr;
+    if (toolName === "Format Converter") {
+        params.innerHTML = `
+            <label>Format</label>
+            <select id="convFormat">
+                <option value="wav">WAV</option>
+                <option value="mp3">MP3</option>
+                <option value="flac">FLAC</option>
+                <option value="aac">AAC</option>
+            </select>
+
+            <label>Bitrate</label>
+            <input id="convBitrate" type="number" placeholder="128 / 192 / 256">
+        `;
     }
 
-    .usp {
-        flex-direction: column;
-        text-align: center;
+    if (toolName === "Trim Silence") {
+        params.innerHTML = `
+            <label>Preset</label>
+            <select id="trimPreset">
+                <option value="voice">Voice</option>
+                <option value="music">Music</option>
+                <option value="aggressive">Aggressive</option>
+            </select>
+        `;
     }
+
+    if (toolName === "Phone → Good Sound") {
+        params.innerHTML = `<p>Uses EQ + HPF + light compression</p>`;
+    }
+
+    if (toolName === "Noise Reduction" || toolName === "Basic Mastering") {
+        params.innerHTML = `<p>Coming soon</p>`;
+    }
+
+    document.getElementById("toolModal").classList.add("show");
 }
+
+function closeModal() {
+    document.getElementById("toolModal").classList.remove("show");
+    document.getElementById("modalResult").innerHTML = "";
+}
+
+document.getElementById("toolModal").addEventListener("click", (e) => {
+    if (e.target.id === "toolModal") {
+        closeModal();
+    }
+});
+
+async function runProcessing() {
+    const fileInput = document.getElementById("modalFile");
+    if (!fileInput.files.length) {
+        alert("Select a file");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", fileInput.files[0]);
+
+    let endpoint = "";
+
+    if (currentTool === "Normalization") {
+        endpoint = "/normalize";
+        const mode = document.getElementById("normMode").value;
+        formData.append("mode", mode);
+        formData.append("target", mode === "lufs" ? "-14" : "-6");
+    }
+
+    if (currentTool === "Trim Silence") {
+        endpoint = "/trim";
+        const preset = document.getElementById("trimPreset").value;
+        formData.append("preset", preset);
+    }
+
+    if (currentTool === "Format Converter") {
+        endpoint = "/convert";
+        formData.append("format", document.getElementById("convFormat").value);
+        formData.append("bitrate", document.getElementById("convBitrate").value);
+    }
+
+    if (currentTool === "Phone → Good Sound") {
+        endpoint = "/normalize";
+        formData.append("mode", "lufs");
+        formData.append("target", "-14");
+    }
+
+    if (!endpoint) {
+        alert("This tool is not implemented yet");
+        return;
+    }
+
+    const resultBox = document.getElementById("modalResult");
+    resultBox.innerHTML = "Processing...";
+
+    const res = await fetch(API + endpoint, { method: "POST", body: formData });
+
+    if (!res.ok) {
+        resultBox.innerHTML = "Error processing file.";
+        return;
+    }
+
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "processed.wav";
+    a.click();
+
+    resultBox.innerHTML = "Done ✔ File downloaded.";
+}
+</script>
+
+</body>
+</html>
